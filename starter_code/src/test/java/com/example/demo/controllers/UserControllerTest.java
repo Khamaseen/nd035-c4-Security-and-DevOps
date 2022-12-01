@@ -124,6 +124,44 @@ public class UserControllerTest {
 
     @Test
     public void findByUserNameHappyFlow() {
-        // TODO
+        final String password = "password1234";
+        final String userName = "userName1234";
+        final String hashedByBCrypt = "hashedYeey";
+
+        final Long firstIdToBeCreated = 0L;
+
+        when(this.bCryptPasswordEncoder.encode(password)).thenReturn(hashedByBCrypt);
+
+        User mockUser = new User();
+        mockUser.setUsername(userName);
+        mockUser.setPassword(password);
+        mockUser.setId(firstIdToBeCreated);
+        when(this.userRepository.findByUsername(userName)).thenReturn(mockUser);
+
+        CreateUserRequest r = new CreateUserRequest();
+        r.setConfirmPassword(password);
+        r.setPassword(password);
+        r.setUsername(userName);
+
+        final ResponseEntity<User> createdUserResponse = this.userController.createUser(r);
+
+        assertNotNull(createdUserResponse);
+        assertEquals(200, createdUserResponse.getStatusCodeValue());
+
+        final User createdUser = createdUserResponse.getBody();
+
+        assertNotNull(createdUser);
+
+        final ResponseEntity<User> findByIdUserResponse = this.userController.findByUserName(createdUser.getUsername());
+
+        assertNotNull(findByIdUserResponse);
+        assertEquals(200, findByIdUserResponse.getStatusCodeValue());
+
+        final User findByIdUser = findByIdUserResponse.getBody();
+
+        assertNotNull(findByIdUser);
+        assertEquals(findByIdUser.getUsername(), mockUser.getUsername());
+        assertEquals(findByIdUser.getId(), mockUser.getId());
     }
+
 }
