@@ -10,9 +10,10 @@ import org.junit.Test;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Optional;
+
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class UserControllerTest {
 
@@ -53,5 +54,76 @@ public class UserControllerTest {
         assertNotNull(createdUser.getId());
         assertEquals(createdUser.getUsername(), userName);
         assertEquals(createdUser.getPassword(), hashedByBCrypt);
+
+        verify(this.bCryptPasswordEncoder, times(1)).encode(password);
+
+    }
+
+    @Test
+    public void createUserNagFlowPasswordLessCharacters() {
+        final String password = "pas123";
+        final String userName = "userName1234";
+
+        CreateUserRequest r = new CreateUserRequest();
+        r.setConfirmPassword(password);
+        r.setPassword(password);
+        r.setUsername(userName);
+
+        final ResponseEntity<User> createdUserResponse = this.userController.createUser(r);
+
+        assertNotNull(createdUserResponse);
+        assertEquals(400, createdUserResponse.getStatusCodeValue());
+
+        final User createdUser = createdUserResponse.getBody();
+
+        assertNull(createdUser);
+        verify(this.bCryptPasswordEncoder, times(0)).encode(password);
+    }
+
+    @Test
+    public void findByIdHappyFlow() {
+        final String password = "password1234";
+        final String userName = "userName1234";
+        final String hashedByBCrypt = "hashedYeey";
+
+        final Long firstIdToBeCreated = 0L;
+
+        when(this.bCryptPasswordEncoder.encode(password)).thenReturn(hashedByBCrypt);
+
+        User mockUser = new User();
+        mockUser.setUsername(userName);
+        mockUser.setPassword(password);
+        mockUser.setId(firstIdToBeCreated);
+        when(this.userRepository.findById(firstIdToBeCreated)).thenReturn(Optional.of(mockUser));
+
+        CreateUserRequest r = new CreateUserRequest();
+        r.setConfirmPassword(password);
+        r.setPassword(password);
+        r.setUsername(userName);
+
+        final ResponseEntity<User> createdUserResponse = this.userController.createUser(r);
+
+        assertNotNull(createdUserResponse);
+        assertEquals(200, createdUserResponse.getStatusCodeValue());
+
+        final User createdUser = createdUserResponse.getBody();
+
+        assertNotNull(createdUser);
+
+        final ResponseEntity<User> findByIdUserResponse = this.userController.findById(createdUser.getId());
+
+        assertNotNull(findByIdUserResponse);
+        assertEquals(200, findByIdUserResponse.getStatusCodeValue());
+
+        final User findByIdUser = findByIdUserResponse.getBody();
+
+        assertNotNull(findByIdUser);
+        assertEquals(findByIdUser.getUsername(), mockUser.getUsername());
+        assertEquals(findByIdUser.getId(), mockUser.getId());
+    }
+
+    @Test
+    public void findByUserNameHappyFlow() {
+        // TODO
     }
 }
