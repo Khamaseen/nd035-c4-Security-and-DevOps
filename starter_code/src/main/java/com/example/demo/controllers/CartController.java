@@ -39,7 +39,7 @@ public class CartController {
 	public ResponseEntity<Cart> addTocart(@RequestBody ModifyCartRequest request) {
 		User user = userRepository.findByUsername(request.getUsername());
 		if(user == null) {
-			logger.warn("Modify cart (add) request made but user " + user.getUsername() + "not found");
+			logger.warn("Modify cart (add) request made but user " + request.getUsername() + "not found");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		Optional<Item> item = itemRepository.findById(request.getItemId());

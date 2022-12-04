@@ -1,0 +1,27 @@
+2022-12-04 17:16:58,388 INFO c.e.d.c.UserController [main] Modify cart (add) request successfully made for user UserName
+2022-12-04 17:16:58,411 WARN c.e.d.c.UserController [main] Modify cart (add) request made but item with id 0not found
+2022-12-04 17:16:58,420 INFO c.e.d.c.UserController [main] Items found for user WrappedCircle
+2022-12-04 17:16:58,421 WARN c.e.d.c.UserController [main] No items found for user WrappedCircle
+2022-12-04 17:16:58,453 INFO c.e.d.c.UserController [main] User userName1234 successfully saved an order
+2022-12-04 17:16:58,454 WARN c.e.d.c.UserController [main] User userName1234 not found when trying to search for an order.
+2022-12-04 17:16:58,455 INFO c.e.d.c.UserController [main] User userName1234 successfully retrieved the cart
+2022-12-04 17:16:58,456 WARN c.e.d.c.UserController [main] User userName1234 not found when trying to submit an order.
+2022-12-04 17:16:58,473 INFO c.e.d.c.UserController [main] New user created with name userName1234
+2022-12-04 17:16:58,473 INFO c.e.d.c.UserController [main] User searched and found on name userName1234
+2022-12-04 17:16:58,474 INFO c.e.d.c.UserController [main] New user created with name userName1234
+2022-12-04 17:16:58,474 WARN c.e.d.c.UserController [main] Bad request while creating new user. Password does not pass requirements.
+2022-12-04 17:16:58,475 INFO c.e.d.c.UserController [main] New user created with name userName1234
+2022-12-04 17:17:23,658 INFO c.e.d.c.UserController [main] Modify cart (add) request successfully made for user UserName
+2022-12-04 17:17:23,675 WARN c.e.d.c.UserController [main] Modify cart (add) request made but user UserNamenot found
+2022-12-04 17:17:23,676 WARN c.e.d.c.UserController [main] Modify cart (add) request made but item with id 0not found
+2022-12-04 17:17:23,685 INFO c.e.d.c.UserController [main] Items found for user WrappedCircle
+2022-12-04 17:17:23,686 WARN c.e.d.c.UserController [main] No items found for user WrappedCircle
+2022-12-04 17:17:23,715 INFO c.e.d.c.UserController [main] User userName1234 successfully saved an order
+2022-12-04 17:17:23,716 WARN c.e.d.c.UserController [main] User userName1234 not found when trying to search for an order.
+2022-12-04 17:17:23,717 INFO c.e.d.c.UserController [main] User userName1234 successfully retrieved the cart
+2022-12-04 17:17:23,717 WARN c.e.d.c.UserController [main] User userName1234 not found when trying to submit an order.
+2022-12-04 17:17:23,739 INFO c.e.d.c.UserController [main] New user created with name userName1234
+2022-12-04 17:17:23,739 INFO c.e.d.c.UserController [main] User searched and found on name userName1234
+2022-12-04 17:17:23,740 INFO c.e.d.c.UserController [main] New user created with name userName1234
+2022-12-04 17:17:23,741 WARN c.e.d.c.UserController [main] Bad request while creating new user. Password does not pass requirements.
+2022-12-04 17:17:23,742 INFO c.e.d.c.UserController [main] New user created with name userName1234
